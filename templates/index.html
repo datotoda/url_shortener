@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    
+    {% if new %}
+        <form action="" method="post">
+
+            {% if premium %}
+                <p>costum short url:<br>
+                    <input type="text" name="premium_short" {% if short_url %} value="{{ short_url }}" {% endif %}>
+                </p>
+            {% endif %}
+
+            <p>url:<br>
+                <input type="text" name="form_url" maxlength="250" {% if form_url %} value="{{ form_url }}" {% endif %}>
+            </p>
+
+            <button type="submit" name="submit">Generate</button>
+        
+        </form>
+    {% else %}
+        <p>short link: <a href="{{ short_url }}">{{ short_url }}</a></p>
+        <p>original link: <a href="{{ form_url }}">{{ form_url }}</a></p>
+    {% endif %}
+
+{% endblock %}
+
+
+
